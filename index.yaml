@@ -1,0 +1,17 @@
+apiVersion: v1
+entries:
+  parlai:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-11-09T17:01:18.307745935Z"
+    description: A Helm chart to deploy parlai conversational bots on Kubernetes
+    digest: 3f5a24cf6fabfd9bfe0cd81fa2a745399f47fe2fd4282d2324b813207e58bd78
+    maintainers:
+    - email: louis.beaumont@langa.me
+      name: louis030195
+    name: parlai
+    type: application
+    urls:
+    - https://github.com/langa-me/helm-charts/releases/download/parlai-0.1.0/parlai-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-11-09T17:01:18.307751535Z"
