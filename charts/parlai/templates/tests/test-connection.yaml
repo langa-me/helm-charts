@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "parlai.fullname" . }}-test-connection"
+  labels:
+    {{- include "parlai.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: websocket
+      image: ubuntu:20.04
+      command: |
+        PYTHON_CODE=$(cat <<END
+        import asyncio
+        import websockets
+        import json
+        from concurrent.futures import TimeoutError as ConnectionTimeoutError
+        async def hello():
+            # HOST = 'langame-ava-miqqfcvptq-uc.a.run.app'
+            HOST = 'localhost:8080'
+            HTTPS = False
+            # timeout in seconds
+            timeout = 1200 
+            try:
+                connection = await asyncio.wait_for(websockets.connect(f'{"wss" if HTTPS else "ws"}://{HOST}/websocket'), timeout)
+                d = {
+                    "text": "hello"
+                }
+
+                await connection.send(json.dumps(d))
+
+                greeting = await connection.recv()
+                print("< {}".format(greeting))
+                        
+                        
+                d = {
+                    "text": "begin"
+                }
+
+                await connection.send(json.dumps(d))
+
+                greeting = await connection.recv()
+                print("< {}".format(greeting))
+            except ConnectionTimeoutError as e:
+                print('Error connecting.')
+
+        asyncio.get_event_loop().run_until_complete(hello())
+        END
+        )
+        res="$(python3 -c "$PYTHON_CODE")"
+        echo "$res"
+      args: ['{{ include "parlai.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
