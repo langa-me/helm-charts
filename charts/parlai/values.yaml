@@ -22,6 +22,8 @@
 storage:
   # Useful if you want to avoid downloading models every times
   size: 20Gi # or 2024Mi
+  # parlai stores its data here, in the virtual environment of the container
+  path: /opt/venv/lib/python3.8/site-packages/data
 
 replicaCount: 1
 
