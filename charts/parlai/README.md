@@ -11,8 +11,8 @@ As per [parlai documentation](https://github.com/facebookresearch/ParlAI/):
 - Helm 3.0+
 - A Docker image internet-accessible that runs a ParlAI bot similar to in the
 [examples](https://github.com/facebookresearch/ParlAI/tree/main/parlai/chat_service) with such a Docker configuration:
-```docker
-FROM python:3.7-slim AS compile-image
+```dockerfile
+FROM python:3.8-slim AS compile-image
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends build-essential gcc && pip3 install virtualenv
 
@@ -23,7 +23,9 @@ ENV PATH="/opt/venv/bin:$PATH"
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-FROM python:3.7-slim AS build-image
+# If you have GPU nodes uncomment the following (and keep python for running):
+# FROM nvidia/cuda:11.4.2-base-ubuntu20.04
+FROM python:3.8-slim
 COPY --from=compile-image /opt/venv /opt/venv
 
 # Make sure we use the virtualenv:
@@ -40,7 +42,7 @@ ENTRYPOINT ["python", "run.py"]
 CMD ["--config_path", "./config.yaml", "--port", "8080"]
 ```
 
-If you want to quickly try, use the basic image [louis030195/ava:latest-dev](https://hub.docker.com/r/louis030195/ava) for example.
+If you want to quickly try, use the basic image [louis030195/ava:latest-cpu](https://hub.docker.com/r/louis030195/ava) for example.
 
 ## Get Repo Info
 
