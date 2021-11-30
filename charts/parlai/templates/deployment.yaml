@@ -37,16 +37,19 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
             - "--config_path"
-            - "/app/config.yaml"
+            - "{{ .Values.configuration_directory_path }}/config.yaml"
             - "--port"
-            - "80"
+            - "{{ .Values.container_port }}"
+          env:
+            - name: PORT
+              value: "{{ .Values.container_port }}"
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.container_port }}
               protocol: TCP
           volumeMounts:
             - name: config-volume
-              mountPath: /app/config.yaml
+              mountPath: "/{{ .Values.configuration_directory_path }}/config.yaml"
               subPath: config.yaml
             - name: data
               mountPath: {{ .Values.storage.path }}

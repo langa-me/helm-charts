@@ -1,3 +1,5 @@
+configuration_directory_path: /etc/secrets/config.yaml
+container_port: 8080
 # see examples https://github.com/facebookresearch/ParlAI/blob/main/parlai/chat_service/tasks/chatbot/config.yml
 # botConfig: {}
   # tasks:
