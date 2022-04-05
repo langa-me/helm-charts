@@ -53,4 +53,16 @@ entries:
     urls:
     - https://github.com/langa-me/helm-charts/releases/download/parlai-0.1.0/parlai-0.1.0.tgz
     version: 0.1.0
-generated: "2021-11-30T10:35:13.448270407Z"
+  parlai-search:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-04-05T00:23:36.472927024Z"
+    description: A Helm chart to deploy a search engine API for https://parl.ai conversational
+      artificial intelligence in Kubernetes.
+    digest: 5f896d72e5479ad17796fa50ee75e35e65a6f58fdad2c14a181f381d82723f5c
+    name: parlai-search
+    type: application
+    urls:
+    - https://github.com/langa-me/helm-charts/releases/download/parlai-search-0.1.0/parlai-search-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-04-05T00:23:36.472948219Z"
