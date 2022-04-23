@@ -5,6 +5,10 @@
 As per [parlai documentation](https://github.com/facebookresearch/ParlAI/):
 > A framework for training and evaluating AI models on a variety of openly available dialogue datasets.
 
+## Blog posts
+
+- https://louis030195.medium.com/deploy-seeker-search-augmented-conversational-ai-on-kubernetes-in-5-minutes-81a61aa4e749
+
 ## Prerequisites
 
 - Kubernetes 1.19+

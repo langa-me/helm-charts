@@ -37,19 +37,28 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
             - "--config_path"
-            - "{{ .Values.configuration_directory_path }}/config.yaml"
+            - "{{ .Values.configurationDirectoryPath }}/config.yaml"
             - "--port"
-            - "{{ .Values.container_port }}"
+            - "{{ .Values.containerPort }}"
           env:
             - name: PORT
-              value: "{{ .Values.container_port }}"
+              value: "{{ .Values.containerPort }}"
           ports:
             - name: http
-              containerPort: {{ .Values.container_port }}
+              containerPort: {{ .Values.containerPort }}
               protocol: TCP
+          startupProbe: 
+            tcpSocket:
+              port: {{ .Values.containerPort }}
+            initialDelaySeconds: 60
+            periodSeconds: 60
+            # Downloading models might take up to 30 minutes depending on network resources
+            timeoutSeconds: 1800
+            successThreshold: 1
+            failureThreshold: 300
           volumeMounts:
             - name: config-volume
-              mountPath: "/{{ .Values.configuration_directory_path }}/config.yaml"
+              mountPath: "/{{ .Values.configurationDirectoryPath }}/config.yaml"
               subPath: config.yaml
             - name: data
               mountPath: {{ .Values.storage.path }}
