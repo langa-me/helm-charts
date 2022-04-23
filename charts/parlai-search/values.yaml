@@ -2,6 +2,16 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+searchEngine:
+  # google-scrapping -> scrap google, get 429 rate limited regularly
+  # google-official -> use google official search api, no restrictions
+  type: google-scrapping
+  # get it on Google Cloud IAM panels
+  googleSearchKey: MY_GOOGLE_SEARCH_KEY
+  # get it on Google custom search panels
+  googleSearchCx: MY_GOOGLE_SEARCH_CX
+
+
 replicaCount: 1
 
 image:

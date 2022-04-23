@@ -37,6 +37,19 @@ spec:
             - "serve"
             - "--host"
             - "0.0.0.0:8080"
+            {{ if eq .Values.searchEngine.type "google-official" }}
+            - --use_official_google_api
+            - "True"
+            - --google_search_key 
+            - {{ .Values.searchEngine.googleSearchKey }}
+            - --google_search_cx 
+            - {{ .Values.searchEngine.googleSearchCx }}
+            {{ else if eq .Values.searchEngine.type "bing" }}
+            {{- fail "bing search is not supported yet" }}
+            {{ else if eq .Values.searchEngine.type "google-scrapping" }}
+            {{ else }}
+            {{- fail "value for .Values.searchEngine.type should either be 'google-official' or 'google-scrapping'" }}
+            {{ end }}
           ports:
             - name: http
               containerPort: 8080

@@ -2,4 +2,4 @@
 /charts/*/charts
 .idea
 
-*values-dev.yaml*
+values-*
